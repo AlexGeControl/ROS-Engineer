@@ -1,6 +1,6 @@
 # Docker for ROS, Theory and Practice
 
-This is the Docker image for [ROS, Theory and Practice, 深蓝学院](https://www.shenlanxueyuan.com/my/course/246).
+This is the Docker image for [ROS, Theory and Practice, 深蓝学院](https://www.shenlanxueyuan.com/my/course/246) and [Robotics Software Engineer, Udacity](https://www.udacity.com/course/robotics-software-engineer--nd209).
 
 ---
 
@@ -14,7 +14,7 @@ First, install `Docker` and `Docker-Compose`.
 
 Please follow [Docker Official Guide](https://docs.docker.com/engine/install/ubuntu/) and finish `Docker` installation
 
-After installation remember to add current user to docker group so that docker can be used without `sudo`:
+After installation `remember to add current user to docker group` so that docker can be used without `sudo`:
 
 ```bash
 sudo usermod -aG docker $USER
@@ -34,28 +34,23 @@ Please follow [Docker Compose Official Guide](https://docs.docker.com/compose/in
 
 ### Configuration
 
-Before launching the instance please change the config according to your local environment. The launch script can be found [here](launch-object-detection-gpu.sh).
+Before launching the instance please change the config according to your local environment. The launch script can be found [here](docker-compose.yml).
 
-```bash
-#!/bin/bash
-
-docker run \
-  # use GPU:
-  --gpus all \
-  --privileged \
-  # volumne for source code & data:
-  -v ${PWD}/workspace:/workspace \
-  # volume for anaconda environment:
-  -v ${PWD}/environment:/workspace/environment \
-  # network port for supervisord:
-  -p 49001:9001 \
-  # network port for VNC client:
-  -p 45901:5901 \
-  # network port for HTML5 VNC:
-  -p 40080:80 \
-  # network port for tensorboard:
-  -p 46006:6006 \
-  --name object-detection-gpu shenlanxueyuan/object-detection-gpu:latest
+```yaml
+  volumes:
+    # source code:
+    - ${PWD}/workspace/assignments:/workspace/assignments
+    # data:
+    - ${PWD}/workspace/data:/workspace/data
+  ports:
+    # HTML5 VNC:
+    - 40080:80
+    # standard VNC client:
+    - 45901:5901
+    # supervisord admin:
+    - 49001:9001
+    # ROS master:
+    - 11311:11311
 ```
 
 ---
@@ -65,8 +60,8 @@ docker run \
 #### Launch VNC Instance
 
 ```bash
-# using docker native
-./launch-object-detection-gpu.sh
+# using docker-compose
+docker-compose down && docker-compose up workspace-vnc-bionic-cpu
 ```
 
 ---

@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  # development:
+  workspace-vnc-bionic-cpu:
+    build:
+      context: .
+      dockerfile: cpu-vnc.Dockerfile
+      network: host
+    image: shenlanxueyuan/ros-engineer-cpu
+    container_name: ros-engineer-cpu
+    privileged: true
+    environment:
+        # set VNC login password here:
+        - VNC_PASSWORD=shenlanxueyuan
+        # - ROS_MASTER_URI=http://192.168.8.88:11311
+        # - ROS_HOSTNAME=192.168.8.14
+        # - ROS_IP=192.168.8.14
+    volumes:
+      # source code:
+      - ${PWD}/workspace/assignments:/workspace/assignments
+      # data:
+      - ${PWD}/workspace/data:/workspace/data
+    ports:
+      # HTML5 VNC:
+      - 40080:80
+      # standard VNC client:
+      - 45901:5901
+      # supervisord admin:
+      - 49001:9001
+      # ROS master:
+      - 11311:11311
