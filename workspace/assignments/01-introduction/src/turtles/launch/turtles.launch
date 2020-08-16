@@ -1,0 +1,17 @@
+<launch> 
+    <!-- simulator -->
+    <node name="simulation" pkg="turtlesim" type="turtlesim_node" /> 
+    
+    <!-- spawn new turtles -->
+    <node name="spawn_turtle_2" pkg="rosservice" type="rosservice" args="call --wait /spawn &quot;{x: 3.0, y: 3.0, theta: 0.0, name: &apos;turtle2&apos;}&quot;" />
+    <node name="spawn_turtle_3" pkg="rosservice" type="rosservice" args="call --wait /spawn &quot;{x: 8.0, y: 8.0, theta: 0.0, name: &apos;turtle3&apos;}&quot;" />
+
+    <!-- teleop -->
+    <node name="operation_turtle1" pkg="turtlesim" type="turtle_teleop_key" output="screen" />
+    <node name="operation_turtle2" pkg="topic_tools" type="relay" args="/turtle1/cmd_vel /turtle2/cmd_vel" />
+    <node name="operation_turtle3" pkg="topic_tools" type="relay" args="/turtle1/cmd_vel /turtle3/cmd_vel" />
+
+    <!-- set motion -->
+    <node name="set_motion" pkg="rostopic" type="rostopic" 
+          args="pub -r 25 /turtle1/cmd_vel geometry_msgs/Twist '{linear: {x: 0.2, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.2}}'" />
+</launch>
