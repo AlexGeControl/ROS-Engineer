@@ -1,0 +1,12 @@
+<launch> 
+    <!-- simulator -->
+    <node name="simulation" pkg="turtlesim" type="turtlesim_node" /> 
+    
+    <!-- turtlesim control -->
+    <node name="turtlesim_control_node" pkg="turtlesim_control" type="turtlesim_control_node">
+        <!-- load default params -->
+        <rosparam command="load" file="$(find turtlesim_control)/config/turtlesim_control.yaml" />
+
+        <!-- configuration -->
+    </node> 
+</launch>

@@ -1,0 +1,3 @@
+spawn:
+    # grid size in meters:
+    grid_size: 2.0

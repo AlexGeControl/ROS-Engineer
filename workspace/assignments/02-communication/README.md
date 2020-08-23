@@ -78,3 +78,25 @@ catkin build spawn_srv && roslaunch spawn_srv spawn_srv.launch
 
 * 海龟生成--通过命令行发送新生海龟的名字，即可在仿真器中产生一只新海龟, 且新海龟的位姿与已有海龟位姿并不重叠
 * 运动控制--通过命令行发送指令，控制仿真器中任意海龟圆周运动的启动/停止, 海龟运动速度可通过命令行控制 
+
+#### Solution
+
+The solution is available at package [turtlesim_control](src/turtlesim_control)
+
+Use the following bash commands to build and launch the solution
+
+```bash
+catkin build turtlesim_control && roslaunch turtlesim_control turtlesim_control.launch
+```
+
+In order to `spawn new turtle`, use the command below to call the service `spawn_turtle`
+
+```bash
+rosservice call /turtlesim_control_node/spawn_turtle "name: 'chick'"
+```
+
+To set the speed of a given turtle, call the service `set_speed`
+
+```bash
+rosservice call /turtlesim_control_node/set_speed "id: 1 frequency: 0.2 radius: 0.25"
+```

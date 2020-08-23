@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>turtlesim_control</name>
-  <version>0.0.0</version>
-  <description>The turtlesim_control package</description>
+  <version>1.0.0</version>
+  <description>The turtlesim_control package of assignment 02, ROS Communication, 深蓝学院</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="root@todo.todo">root</maintainer>
+  <maintainer email="alexgecontrol@qq.com">Ge Yao</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -50,7 +50,17 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>rosbag</depend>
+  <depend>roslib</depend>
 
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>message_generation</depend>
+
+  <depend>turtlesim</depend>
+  
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->
