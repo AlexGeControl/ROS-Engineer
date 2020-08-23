@@ -1,0 +1,12 @@
+<launch> 
+    <!-- simulator -->
+    <node name="simulation" pkg="turtlesim" type="turtlesim_node" /> 
+    
+    <!-- pub-sub -->
+    <node name="pub_sub_node" pkg="pub_sub" type="pub_sub_node">
+        <!-- load default params -->
+        <rosparam command="load" file="$(find pub_sub)/config/pub_sub.yaml" />
+
+        <!-- configuration -->
+    </node> 
+</launch>

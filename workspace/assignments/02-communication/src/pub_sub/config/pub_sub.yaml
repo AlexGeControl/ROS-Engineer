@@ -1,0 +1,9 @@
+turtle:
+    id: 1
+    pose:
+        downsample_rate: 10
+    motion:
+        # circular motion frequency in Hz:
+        frequency: 0.1
+        # circular motion radius in meters:
+        radius: 0.5
