@@ -12,7 +12,7 @@ This is the solution of Assignment 03 of ROS Engineering Theory and Practice [�
 
 ### 1. ROS Launch
 
-创建一个learning_launch功能包, 在其中新建launch文件, 使用launch文件, 完成第02讲[ROS Communication](https://github.com/AlexGeControl/ROS-Engineer/tree/master/workspace/assignments/02-communication)三个项目的启动
+创建learning_launch功能包, 在其中新建launch文件, 使用launch文件, 完成第02讲[ROS Communication](https://github.com/AlexGeControl/ROS-Engineer/tree/master/workspace/assignments/02-communication)三个项目的启动
 
 #### Solution
 
@@ -60,6 +60,8 @@ RUN mkdir -p /root/.gazebo/models &&
 
 ### 3. Learning TF2
 
+创建learning_tf2功能包: 已知激光雷达和机器人底盘的坐标变换关系, 广播并监听机器人的坐标变换, 求解激光雷达测量值在底盘坐标系下的坐标值.
+
 #### Solution
 
-The solution is available at package [turtlesim_control](src/turtlesim_control)
+The solution is available at [here](src/turtlesim_control)

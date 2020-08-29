@@ -1,0 +1,11 @@
+base_laser:
+    base_link: base_link
+    sensor_frame: base_laser
+    position:
+        x: 0.10
+        y: 0.00
+        z: 0.20
+    orientation:
+        roll: 0.0
+        pitch: 0.0
+        yaw: 0.0
