@@ -1,0 +1,5 @@
+uint8 id
+float64 frequency
+float64 radius
+---
+string name

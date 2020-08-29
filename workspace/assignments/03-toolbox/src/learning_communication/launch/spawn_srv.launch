@@ -1,0 +1,12 @@
+<launch> 
+    <!-- simulator -->
+    <node name="simulation" pkg="turtlesim" type="turtlesim_node" /> 
+    
+    <!-- turtle spawn service -->
+    <node name="spawn_srv_node" pkg="learning_communication" type="spawn_srv_node"> 
+        <!-- load default params -->
+        <rosparam command="load" file="$(find learning_communication)/config/spawn_srv.yaml" />
+
+        <!-- configuration -->
+    </node> 
+</launch>

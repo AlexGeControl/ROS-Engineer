@@ -1,0 +1,6 @@
+spawn_turtle:
+    id: 2
+    pose:
+        x: 8.0
+        y: 8.0
+        theta: 0.0 
