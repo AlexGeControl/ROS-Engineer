@@ -4,7 +4,7 @@
 #include <string>
 
 #include <ros/ros.h>
-
+#include <tf2_ros/transform_listener.h>
 
 namespace learning_tf2 {
 
@@ -13,6 +13,7 @@ namespace sensor {
 struct Config {
     std::string topic_name;
     std::string sensor_frame;
+    std::string base_link;
 };
 
 class Activity {
@@ -27,6 +28,9 @@ private:
     Config config_;
     
     ros::NodeHandle private_nh_;
+
+    tf2_ros::Buffer tf_buffer_;
+    tf2_ros::TransformListener tf_listener_;
 
     ros::Publisher pub_;
 };
