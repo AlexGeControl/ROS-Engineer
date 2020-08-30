@@ -1,0 +1,9 @@
+source_name: turtle1
+target_name: turtle2
+
+source_frame: base_link
+target_frame: target
+
+control:
+    K_v: 0.5
+    K_w: 4.0

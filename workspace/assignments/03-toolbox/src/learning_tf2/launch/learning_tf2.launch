@@ -1,0 +1,45 @@
+<launch> 
+    <!-- simulator -->
+    <node name="simulation" pkg="turtlesim" type="turtlesim_node" /> 
+    <node name="spawn_target" pkg="rosservice" type="rosservice" args="call --wait /spawn &quot;{x: 10.0, y: 10.0, theta: 0.0, name: &apos;turtle2&apos;}&quot;" />
+    
+    <!-- control -->
+    <node pkg="turtlesim" type="turtle_teleop_key" name="control_node" output="screen"/>
+
+    <!-- static tf -->
+    <node name="static_tf_node" pkg="learning_tf2" type="static_tf_node">
+        <!-- load default params -->
+        <rosparam command="load" file="$(find learning_tf2)/config/static_tf.yaml" />
+    </node> 
+
+    <!-- 
+        in production we should use the following tool directly
+        args in order: 
+            x 
+            y 
+            z 
+            yaw 
+            pitch 
+            roll 
+            frame_id 
+            child_frame_id 
+    -->
+    <!-- node 
+        pkg="tf2_ros" 
+        type="static_transform_publisher" 
+        name="base_laser_broadcaster" 
+        args="0.1 0.0 0.2 0.0 0.0 0.0 base_link base_laser" 
+    / -->
+
+    <!-- dynamic tf -->
+    <node name="base_link_node" pkg="learning_tf2" type="base_link_node">
+        <!-- load default params -->
+        <rosparam command="load" file="$(find learning_tf2)/config/base_link.yaml" />
+    </node>
+
+    <!-- tracking -->
+    <node name="listener_node" pkg="learning_tf2" type="listener_node">
+        <!-- load default params -->
+        <rosparam command="load" file="$(find learning_tf2)/config/listener.yaml" />
+    </node>
+</launch>

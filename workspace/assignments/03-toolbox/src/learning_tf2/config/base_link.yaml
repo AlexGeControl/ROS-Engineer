@@ -1,0 +1,6 @@
+source_name: turtle1
+target_name: turtle2
+
+map_frame: world
+base_link: base_link
+target_frame: target

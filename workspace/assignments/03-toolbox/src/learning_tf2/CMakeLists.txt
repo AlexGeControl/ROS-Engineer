@@ -111,6 +111,7 @@ catkin_package(
         include
     LIBRARIES 
         static_tf_activity
+        base_link_activity
     CATKIN_DEPENDS 
         turtlesim
 #  DEPENDS system_lib
@@ -133,6 +134,22 @@ add_library(static_tf_activity
     src/static_tf/activity.cpp
 )
 target_link_libraries(static_tf_activity
+    ${catkin_LIBRARIES}
+)
+
+## Declare base link library
+add_library(base_link_activity
+    src/base_link/activity.cpp
+)
+target_link_libraries(base_link_activity
+    ${catkin_LIBRARIES}
+)
+
+## Declare listener library
+add_library(listener_activity
+    src/listener/activity.cpp
+)
+target_link_libraries(listener_activity
     ${catkin_LIBRARIES}
 )
 
@@ -165,6 +182,24 @@ target_link_libraries(static_tf_node
     ${catkin_LIBRARIES}
 )
 
+## Declare base link node executable
+add_executable(base_link_node
+    src/base_link/node.cpp
+)
+target_link_libraries(base_link_node
+    base_link_activity
+    ${catkin_LIBRARIES}
+)
+
+## Declare listener node executable
+add_executable(listener_node
+    src/listener/node.cpp
+)
+target_link_libraries(listener_node
+    listener_activity
+    ${catkin_LIBRARIES}
+)
+
 #############
 ## Install ##
 #############
@@ -183,6 +218,8 @@ target_link_libraries(static_tf_node
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
 install(TARGETS 
         static_tf_node
+        base_link_node
+        listener_node
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -190,6 +227,8 @@ install(TARGETS
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
 install(TARGETS 
         static_tf_activity
+        base_link_activity
+        listener_activity
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
