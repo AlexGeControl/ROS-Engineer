@@ -42,4 +42,13 @@
         <!-- load default params -->
         <rosparam command="load" file="$(find learning_tf2)/config/listener.yaml" />
     </node>
+
+    <!-- perception -->
+    <node name="sensor_node" pkg="learning_tf2" type="sensor_node">
+        <!-- load default params -->
+        <rosparam command="load" file="$(find learning_tf2)/config/sensor.yaml" />
+    </node>
+
+    <!-- visualization -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find learning_tf2)/rviz/learning_tf2.rviz" />
 </launch>

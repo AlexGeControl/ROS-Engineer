@@ -13,6 +13,7 @@ set(ROS_PACKAGE_DEPS
   geometry_msgs
   tf2
   tf2_ros
+  pcl_ros
   turtlesim
 )
 find_package(catkin REQUIRED COMPONENTS ${ROS_PACKAGE_DEPS})
@@ -153,6 +154,14 @@ target_link_libraries(listener_activity
     ${catkin_LIBRARIES}
 )
 
+## Declare sensor library
+add_library(sensor_activity
+    src/sensor/activity.cpp
+)
+target_link_libraries(sensor_activity
+    ${catkin_LIBRARIES}
+)
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -200,6 +209,15 @@ target_link_libraries(listener_node
     ${catkin_LIBRARIES}
 )
 
+## Declare sensor node executable
+add_executable(sensor_node
+    src/sensor/node.cpp
+)
+target_link_libraries(sensor_node
+    sensor_activity
+    ${catkin_LIBRARIES}
+)
+
 #############
 ## Install ##
 #############
@@ -220,6 +238,7 @@ install(TARGETS
         static_tf_node
         base_link_node
         listener_node
+        sensor_node
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -229,6 +248,7 @@ install(TARGETS
         static_tf_activity
         base_link_activity
         listener_activity
+        sensor_activity
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
@@ -244,14 +264,19 @@ install(DIRECTORY
 
 ## Mark other directories for installation:
 install(DIRECTORY
+        config/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
+    FILES_MATCHING PATTERN "*.yaml"
+)
+install(DIRECTORY
         launch/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
     FILES_MATCHING PATTERN "*.launch"
 )
 install(DIRECTORY
-        config/
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
-    FILES_MATCHING PATTERN "*.yaml"
+        rviz/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/rviz
+    FILES_MATCHING PATTERN "*.rviz"
 )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
