@@ -64,4 +64,20 @@ RUN mkdir -p /root/.gazebo/models &&
 
 #### Solution
 
-The solution is available at [here](src/turtlesim_control)
+The solution is available at [here](src/learning_tf2). Follow the instructions below to reproduce the results
+
+```bash
+# build release:
+catkin config --install && catkin build learning_tf2
+# set up session:
+source install/setup.bash
+# launch:
+roslaunch learning_tf2 learning_tf2.launch
+```
+
+The solution architect is as follows:
+
+* `static_tf_node` Publish static tf between `base_link` and `base_laser`
+* `sensor_node` Publish simulated laser scan
+
+The transformation of laser scan between different frames is demonstrated in the attached video.
