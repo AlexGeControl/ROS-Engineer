@@ -1,5 +1,5 @@
 <launch>
-    <param name="robot_description" textfile="$(find robot_description)/urdf/pan_tilt.urdf" />
+    <param name="robot_description" textfile="$(find robot_description)/urdf/diff_drive_mobile_robot.urdf" />
 
     <arg name="model" /> 
 
