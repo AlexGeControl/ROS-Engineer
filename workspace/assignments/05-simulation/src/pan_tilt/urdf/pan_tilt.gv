@@ -1,0 +1,8 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"pan_link" [label="pan_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "pan_joint" [label="xyz: 0 0 0.21 \nrpy: 0 -0 0"]
+"pan_joint" -> "pan_link"
+}

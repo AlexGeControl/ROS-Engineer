@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       name="pan_tilt">
+
+       <!-- robot properties -->
+       <xacro:property name="base_link_radius" value="0.20" />
+       <xacro:property name="base_link_length" value="0.02" />
+
+       <xacro:property name="pan_link_radius" value="0.04" />
+       <xacro:property name="pan_link_length" value="0.40" />
+
+       <xacro:property name="tilt_link_radius" value="0.04" />
+       <xacro:property name="tilt_link_length" value="0.30" />
+
+       <!-- macros -->
+       <xacro:macro name="geometry_cylinder" params="radius length">
+              <geometry>
+                     <cylinder radius="${radius}" length="${length}"/>
+              </geometry>
+       </xacro:macro>
+
+       <xacro:macro name="material_white">
+              <material name="white">
+                     <color rgba="1.0 1.0 1.0 1.0"/>
+              </material>
+       </xacro:macro>
+
+       <xacro:macro name="inertial_matrix" params="mass">
+              <inertial>
+                     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                     <mass value="${mass}"/>
+                     <inertia ixx="0.0" ixy="0.0" ixz="0.0" 
+                              iyy="0.0" iyz="0.0" 
+                              izz="0.0"/>
+              </inertial>
+	</xacro:macro>
+
+       <!-- definition -->
+       <link name="base_link">
+              <visual name="base_link">
+                     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                     <xacro:geometry_cylinder radius="${base_link_radius}" length="${base_link_length}"/>
+                     <xacro:material_white />
+              </visual>
+       </link>
+
+       <joint name="pan_joint" type="continuous">
+              <origin xyz="0.0 0.0 0.21" rpy="0.0 0.0 0.0"/>
+              <parent link="base_link"/>
+              <child link="pan_link"/>
+              <axis xyz="0.0 0.0 1.0"/>
+       </joint>
+
+       <link name="pan_link">
+              <xacro:inertial_matrix mass="1"/>
+              <visual name="pan_link">
+                     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                     <xacro:geometry_cylinder radius="${pan_link_radius}" length="${pan_link_length}"/>
+                     <xacro:material_white />
+              </visual>
+       </link>
+
+       <joint name="tilt_joint" type="continuous">
+              <origin xyz="0.0 0.0 0.10" rpy="0.0 1.5707963267948966 0.0"/>
+              <parent link="pan_link"/>
+              <child link="tilt_link"/>
+              <axis xyz="0.0 0.0 1.0"/>
+       </joint>
+
+       <link name="tilt_link">
+              <xacro:inertial_matrix mass="1"/>
+              <visual name="tilt_link">
+                     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                     <xacro:geometry_cylinder radius="${tilt_link_radius}" length="${tilt_link_length}"/>
+                     <xacro:material_white />
+              </visual>
+       </link>
+</robot>
+
